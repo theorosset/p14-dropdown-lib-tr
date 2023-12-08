@@ -19,8 +19,8 @@ interface Props {
     SelectedValue: (value: {id: string, value: string}) => void;
     size?: "small" | "medium" | "large"
     id: string
-    dropDownOpenId: (id: string) => void
-    forceClose: boolean
+    dropDownOpenId?: (id: string) => void
+    forceClose?: boolean
 }
 
 const DropDown: FC<Props> = ({ options, id, SelectedValue, dropDownOpenId, size, forceClose} ) => {
@@ -28,7 +28,7 @@ const DropDown: FC<Props> = ({ options, id, SelectedValue, dropDownOpenId, size,
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
-        if(isOpen === true) {
+        if(isOpen === true && dropDownOpenId) {
             dropDownOpenId(id)
         }
 

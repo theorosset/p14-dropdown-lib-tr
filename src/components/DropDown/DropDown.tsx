@@ -1,21 +1,19 @@
 import { FC, useEffect, useState } from "react"
 import "./DropDown.css"
 import React from "react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 
-type stateData = {
+type DropdownData = {
     id: number,
     name: string,
-    abbreviation: string
-}
-
- type departmentData = {
-    id: number,
-    name: string,
+    abbreviation?: string
 }
 
 interface Props {
-    options: stateData[] | departmentData[]
+    options: DropdownData[]
     SelectedValue: (value: {id: string, value: string}) => void;
     size?: "small" | "medium" | "large"
     id: string
@@ -58,7 +56,7 @@ const DropDown: FC<Props> = ({ options, id, SelectedValue, dropDownOpenId, size,
             <div className={`dropDown__container__input ${isOpen ? 'borderBottomNone' : ''}`} onClick={toggle}>
                 <div className="dropDown__container__input--value" id={id}>
                 <p>{dropdownValue}</p>
-                <i className={`fas fa-chevron-${isOpen ? 'down' : 'up'}`}></i>
+                <FontAwesomeIcon icon={isOpen ? faChevronDown : faChevronUp} />
                 </div>
             </div>
             <div className={`dropDown__container__options ${isOpen ? 'supperposition' : 'displayNone'}`}>

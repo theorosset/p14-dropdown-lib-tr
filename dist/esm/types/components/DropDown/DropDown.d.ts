@@ -1,16 +1,13 @@
 import { FC } from "react";
 import "./DropDown.css";
-type stateData = {
+import '@fortawesome/fontawesome-free/css/all.css';
+type DropdownData = {
     id: number;
     name: string;
-    abbreviation: string;
-};
-type departmentData = {
-    id: number;
-    name: string;
+    abbreviation?: string;
 };
 interface Props {
-    options: stateData[] | departmentData[];
+    options: DropdownData[];
     SelectedValue: (value: {
         id: string;
         value: string;

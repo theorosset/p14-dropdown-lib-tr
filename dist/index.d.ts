@@ -1,16 +1,12 @@
 import { FC } from 'react';
 
-type stateData = {
+type DropdownData = {
     id: number;
     name: string;
-    abbreviation: string;
-};
-type departmentData = {
-    id: number;
-    name: string;
+    abbreviation?: string;
 };
 interface Props {
-    options: stateData[] | departmentData[];
+    options: DropdownData[];
     SelectedValue: (value: {
         id: string;
         value: string;

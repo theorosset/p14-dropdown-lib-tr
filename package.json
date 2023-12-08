@@ -1,10 +1,11 @@
 {
   "name": "p14-dropdown-lib-alternance",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "types": "dist/index.d.ts",
   "description": "dropdown lib for project",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "keywords": ["alternance", "dropdown"],
   "files": [
     "dist"
   ],

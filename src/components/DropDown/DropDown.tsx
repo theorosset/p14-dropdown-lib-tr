@@ -1,6 +1,7 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import "./DropDown.css"
 import React from "react"
+
 
 type stateData = {
     id: number,
@@ -18,12 +19,23 @@ interface Props {
     SelectedValue: (value: {id: string, value: string}) => void;
     size?: "small" | "medium" | "large"
     id: string
+    dropDownOpenId: (id: string) => void
+    forceClose: boolean
 }
 
-const DropDown: FC<Props> = ({ options, id, SelectedValue, size } ) => {
+const DropDown: FC<Props> = ({ options, id, SelectedValue, dropDownOpenId, size, forceClose} ) => {
     const [dropdownValue, setDropDownValue] = useState('')
     const [isOpen, setIsOpen] = useState(false)
 
+    useEffect(() => {
+        if(isOpen === true) {
+            dropDownOpenId(id)
+        }
+
+        if(forceClose === true) {
+            setIsOpen(false)
+        }
+    }, [forceClose])
     const toggle = () => {
         setIsOpen(!isOpen)
     }

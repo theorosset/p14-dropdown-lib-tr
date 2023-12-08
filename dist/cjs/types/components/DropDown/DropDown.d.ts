@@ -17,8 +17,8 @@ interface Props {
     }) => void;
     size?: "small" | "medium" | "large";
     id: string;
-    dropDownOpenId?: (id: string) => void;
-    forceClose?: boolean;
+    dropDownOpenId: (id: string) => void;
+    forceCloseDropdown: string;
 }
 declare const DropDown: FC<Props>;
 export default DropDown;

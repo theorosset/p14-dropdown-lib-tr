@@ -31,19 +31,22 @@ var css_248z = ".displayNone {\n  display: none;\n}\n\n.dropDown__container {\n 
 styleInject(css_248z);
 
 var DropDown = function (_a) {
-    var options = _a.options, id = _a.id, SelectedValue = _a.SelectedValue, dropDownOpenId = _a.dropDownOpenId, size = _a.size, forceClose = _a.forceClose;
+    var options = _a.options, id = _a.id, SelectedValue = _a.SelectedValue, dropDownOpenId = _a.dropDownOpenId, size = _a.size, forceCloseDropdown = _a.forceCloseDropdown;
     var _b = useState(''), dropdownValue = _b[0], setDropDownValue = _b[1];
     var _c = useState(false), isOpen = _c[0], setIsOpen = _c[1];
     useEffect(function () {
-        if (isOpen === true && dropDownOpenId) {
-            dropDownOpenId(id);
-        }
-        if (forceClose === true) {
+        if (forceCloseDropdown !== id) {
             setIsOpen(false);
         }
-    }, [forceClose]);
+    }, [forceCloseDropdown]);
     var toggle = function () {
-        setIsOpen(!isOpen);
+        setIsOpen(function (prevState) {
+            var newState = !prevState;
+            if (newState === true) {
+                dropDownOpenId(id);
+            }
+            return newState;
+        });
     };
     var handlerSelectDropDown = function (event) {
         var valueChoose = event.currentTarget.textContent;

@@ -19,25 +19,29 @@ interface Props {
     SelectedValue: (value: {id: string, value: string}) => void;
     size?: "small" | "medium" | "large"
     id: string
-    dropDownOpenId?: (id: string) => void
-    forceClose?: boolean
+    dropDownOpenId: (id: string) => void
+    forceCloseDropdown: string
 }
 
-const DropDown: FC<Props> = ({ options, id, SelectedValue, dropDownOpenId, size, forceClose} ) => {
+const DropDown: FC<Props> = ({ options, id, SelectedValue, dropDownOpenId, size, forceCloseDropdown} ) => {
     const [dropdownValue, setDropDownValue] = useState('')
     const [isOpen, setIsOpen] = useState(false)
 
+    
     useEffect(() => {
-        if(isOpen === true && dropDownOpenId) {
-            dropDownOpenId(id)
-        }
-
-        if(forceClose === true) {
+        if(forceCloseDropdown !== id) {
             setIsOpen(false)
         }
-    }, [forceClose])
+    }, [forceCloseDropdown])
+
     const toggle = () => {
-        setIsOpen(!isOpen)
+        setIsOpen((prevState) => {
+            const newState = !prevState
+            if(newState === true) {
+                dropDownOpenId(id)
+            }
+            return newState
+        })
     }
 
     const handlerSelectDropDown = (event: React.MouseEvent<HTMLLIElement>) => {

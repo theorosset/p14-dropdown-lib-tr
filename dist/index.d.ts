@@ -7,14 +7,14 @@ type DropdownData = {
 };
 interface Props {
     options: DropdownData[];
-    SelectedValue: (value: {
-        id: string;
+    onSelectedValue: (value: {
+        id: number;
         value: string;
     }) => void;
     size?: "small" | "medium" | "large";
-    id: string;
-    dropDownOpenId: (id: string) => void;
-    forceCloseDropdown: string;
+    id: number;
+    onOpened: (id: number) => void;
+    idOfDropdownOpened?: number;
 }
 declare const DropDown: FC<Props>;
 

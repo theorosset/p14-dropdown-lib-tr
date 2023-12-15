@@ -22,16 +22,16 @@ const meta: StorybookMeta<typeof DropDown> = {
     options: {
       description: 'Set data in dropdown.'
     },
-    SelectedValue: {
-      description: 'Return the selected value to the parent.'
+    onSelectedValue: {
+      description: 'Use this function to get the selected value.'
     },
     id: {
       description: 'id of the component.'
     },
-    forceCloseDropdown: {
+    idOfDropdownOpened: {
       description: 'If you set this props with id of your dropdown the dropdown are closed.'
     },
-    dropDownOpenId: {
+    onOpened: {
       description: 'With this function, you can determine which dropdown is open.'
     }
   },
@@ -54,10 +54,10 @@ const optionsForDropDown = [
 export const PlayGround: Story = {
   args: {
     options:optionsForDropDown,
-    SelectedValue:(value: {id: string, value: string}) => {return value} ,
+    onSelectedValue:(value: {id: number, value: string}) => {return value} ,
     size:'medium',
-    id:'1',
-    dropDownOpenId: (id: string) =>  id,
-    forceCloseDropdown: ''
+    id:1,
+    onOpened: (id: number) =>  id,
+    idOfDropdownOpened: 0
   },
 };

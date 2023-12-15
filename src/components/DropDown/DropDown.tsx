@@ -14,29 +14,29 @@ type DropdownData = {
 
 interface Props {
     options: DropdownData[]
-    SelectedValue: (value: {id: string, value: string}) => void;
+    onSelectedValue: (value: {id: number, value: string}) => void;
     size?: "small" | "medium" | "large"
-    id: string
-    dropDownOpenId: (id: string) => void
-    forceCloseDropdown: string
+    id: number
+    onOpened: (id: number) => void
+    idOfDropdownOpened?: number
 }
 
-const DropDown: FC<Props> = ({ options, id, SelectedValue, dropDownOpenId, size, forceCloseDropdown} ) => {
+const DropDown: FC<Props> = ({ options, id, onSelectedValue, onOpened, size, idOfDropdownOpened} ) => {
     const [dropdownValue, setDropDownValue] = useState('')
     const [isOpen, setIsOpen] = useState(false)
 
     
     useEffect(() => {
-        if(forceCloseDropdown !== id) {
+        if(idOfDropdownOpened !== id) {
             setIsOpen(false)
         }
-    }, [forceCloseDropdown])
+    }, [idOfDropdownOpened])
 
     const toggle = () => {
         setIsOpen((prevState) => {
             const newState = !prevState
             if(newState === true) {
-                dropDownOpenId(id)
+                onOpened(id)
             }
             return newState
         })
@@ -45,7 +45,7 @@ const DropDown: FC<Props> = ({ options, id, SelectedValue, dropDownOpenId, size,
     const handlerSelectDropDown = (event: React.MouseEvent<HTMLLIElement>) => {
         const valueChoose = event.currentTarget.textContent;
         if (valueChoose) {
-            SelectedValue({id, value: valueChoose})
+            onSelectedValue({id, value: valueChoose})
             setDropDownValue(valueChoose)
             toggle()
         }
@@ -54,7 +54,7 @@ const DropDown: FC<Props> = ({ options, id, SelectedValue, dropDownOpenId, size,
     return (
         <div className={`dropDown__container ${size ? size : ""}`}>
             <div className={`dropDown__container__input ${isOpen ? 'borderBottomNone' : ''}`} onClick={toggle}>
-                <div className="dropDown__container__input--value" id={id}>
+                <div className="dropDown__container__input--value" id={`${id}`}>
                 <p>{dropdownValue}</p>
                 <FontAwesomeIcon icon={isOpen ? faChevronDown : faChevronUp} />
                 </div>

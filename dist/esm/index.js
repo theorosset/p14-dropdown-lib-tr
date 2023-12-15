@@ -4649,19 +4649,19 @@ var css_248z = "/*!\n * Font Awesome Free 6.5.1 by @fontawesome - https://fontaw
 styleInject(css_248z);
 
 var DropDown = function (_a) {
-    var options = _a.options, id = _a.id, SelectedValue = _a.SelectedValue, dropDownOpenId = _a.dropDownOpenId, size = _a.size, forceCloseDropdown = _a.forceCloseDropdown;
+    var options = _a.options, id = _a.id, onSelectedValue = _a.onSelectedValue, onOpened = _a.onOpened, size = _a.size, idOfDropdownOpened = _a.idOfDropdownOpened;
     var _b = useState(''), dropdownValue = _b[0], setDropDownValue = _b[1];
     var _c = useState(false), isOpen = _c[0], setIsOpen = _c[1];
     useEffect(function () {
-        if (forceCloseDropdown !== id) {
+        if (idOfDropdownOpened !== id) {
             setIsOpen(false);
         }
-    }, [forceCloseDropdown]);
+    }, [idOfDropdownOpened]);
     var toggle = function () {
         setIsOpen(function (prevState) {
             var newState = !prevState;
             if (newState === true) {
-                dropDownOpenId(id);
+                onOpened(id);
             }
             return newState;
         });
@@ -4669,14 +4669,14 @@ var DropDown = function (_a) {
     var handlerSelectDropDown = function (event) {
         var valueChoose = event.currentTarget.textContent;
         if (valueChoose) {
-            SelectedValue({ id: id, value: valueChoose });
+            onSelectedValue({ id: id, value: valueChoose });
             setDropDownValue(valueChoose);
             toggle();
         }
     };
     return (React.createElement("div", { className: "dropDown__container ".concat(size ? size : "") },
         React.createElement("div", { className: "dropDown__container__input ".concat(isOpen ? 'borderBottomNone' : ''), onClick: toggle },
-            React.createElement("div", { className: "dropDown__container__input--value", id: id },
+            React.createElement("div", { className: "dropDown__container__input--value", id: "".concat(id) },
                 React.createElement("p", null, dropdownValue),
                 React.createElement(FontAwesomeIcon, { icon: isOpen ? faChevronDown : faChevronUp }))),
         React.createElement("div", { className: "dropDown__container__options ".concat(isOpen ? 'supperposition' : 'displayNone') },

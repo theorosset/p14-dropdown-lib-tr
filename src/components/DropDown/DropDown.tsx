@@ -25,23 +25,26 @@ const DropDown: FC<Props> = ({ options, id, onSelectedValue, onOpened, size, idO
     const [dropdownValue, setDropDownValue] = useState('')
     const [isOpen, setIsOpen] = useState(false)
 
-    
+    // at update of component check if another dropdown are open and closed it 
     useEffect(() => {
         if(idOfDropdownOpened !== id) {
             setIsOpen(false)
         }
     }, [idOfDropdownOpened])
-
+    
+    //toggle the dropdown
     const toggle = () => {
         setIsOpen((prevState) => {
             const newState = !prevState
             if(newState === true) {
+                //send ID of dropdown opened
                 onOpened(id)
             }
             return newState
         })
     }
 
+    //send the selected value of dropdown
     const handlerSelectDropDown = (event: React.MouseEvent<HTMLLIElement>) => {
         const valueChoose = event.currentTarget.textContent;
         if (valueChoose) {

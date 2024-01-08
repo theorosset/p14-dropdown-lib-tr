@@ -33,10 +33,10 @@ import {Dropdown} from 'p14-dropdown-lib-alternance';
 
 <DropDown
     options={ dropDownData.state }
-    selectedValue={ function(valueGetFromChild){} }
+    onSelectedValue={ function(valueGetFromChild){} }
     id="1"
-    forceCloseDropdown={ openDropDown }
-    dropDownOpenId={ function(idFromChild) {YourStateToSetID} }
+    onOpened={ openDropDown }
+    idOfDropdownOpened={ function(idFromChild) {YourStateToSetID} }
 />
 ```
 
